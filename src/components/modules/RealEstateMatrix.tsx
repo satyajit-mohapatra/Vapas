@@ -294,6 +294,44 @@ export default function RealEstateMatrix() {
                     ))}
                 </div>
             </div>
+
+            {/* Special Comparision: Hyderabad vs Pune */}
+            <div className="glass-card" style={{ marginTop: '48px', padding: '32px', border: '1px solid var(--border-color)', background: 'linear-gradient(to bottom right, rgba(var(--bg-card-rgb), 0.8), rgba(var(--bg-tertiary-rgb), 0.3))' }}>
+                <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+                    <h3 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '8px' }}>⚔️ The Great Debate: Hyderabad vs Pune</h3>
+                    <p style={{ color: 'var(--text-secondary)' }}>The two most popular alternatives to Bengaluru for returning NRIs. How do they stack up?</p>
+                </div>
+
+                <div style={{ overflowX: 'auto' }}>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '15px' }}>
+                        <thead>
+                            <tr style={{ background: 'var(--bg-tertiary)', borderBottom: '2px solid var(--border-color)' }}>
+                                <th style={{ padding: '16px', textAlign: 'left', width: '20%' }}>Feature</th>
+                                <th style={{ padding: '16px', textAlign: 'left', width: '40%', color: 'var(--accent-primary)' }}>Hyderabad 🥘</th>
+                                <th style={{ padding: '16px', textAlign: 'left', width: '40%', color: 'var(--accent-success)' }}>Pune 🎭</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {[
+                                { feature: 'Infrastructure', hyd: 'Superior. Wide ORR, well-planned IT corridors (Gachibowli/Financial Dist).', pune: 'Catching up. Metro is expanding, but roads often narrower/congested in old city.' },
+                                { feature: 'Cost of Living', hyd: 'Low to Moderate. Real estate booming but daily expenses still reasonable.', pune: 'Moderate. Rents rising fast in Baner/Kharadi; food/services slightly pricier.' },
+                                { feature: 'Weather', hyd: 'Hot summers. Excellent winters. Dry heat mostly.', pune: 'Pleasant year-round. Arguably the best weather in India involving a metro.' },
+                                { feature: 'Traffic', hyd: 'Manageable compared to Blr/Pune. ORR helps massive decongestion.', pune: 'Getting worse. Narrow internal roads cause bottlenecks despite flyovers.' },
+                                { feature: 'Work Culture', hyd: 'Aggressive growth. Big tech (Google, FB, MS) + strong Pharma presence.', pune: 'Balanced. Strong Auto/Manufacturing base alongside IT. Slower pace.' },
+                                { feature: 'Weekend Getaways', hyd: 'Limited. Hampi, Srisailam (long drives).', pune: 'Excellent. Lonavala, Mahabaleshwar, beaches of Konkan within 3-4 hrs.' },
+                                { feature: 'Language Barrier', hyd: 'Minimal. Hindi/English widely spoken (Deccani Urdu influence).', pune: 'Moderate. Marathi pride is strong, but IT pockets are cosmopolitan.' },
+                                { feature: 'Water Security', hyd: 'Concern in some areas. Heavy reliance on tankers in summer.', pune: 'Generally better, but summer shortages exist in fringe areas.' }
+                            ].map((row, i) => (
+                                <tr key={i} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                    <td style={{ padding: '16px', fontWeight: '600', color: 'var(--text-primary)' }}>{row.feature}</td>
+                                    <td style={{ padding: '16px', color: 'var(--text-secondary)' }}>{row.hyd}</td>
+                                    <td style={{ padding: '16px', color: 'var(--text-secondary)' }}>{row.pune}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 

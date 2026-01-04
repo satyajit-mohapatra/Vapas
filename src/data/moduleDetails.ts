@@ -195,42 +195,82 @@ export const REAL_ESTATE_TOPICS: ModuleTopicDetail[] = [
     {
         id: 'rent-vs-buy',
         name: 'Rent vs Buy Decision',
-        description: 'Financial analysis for the first 2-3 years after return',
+        description: 'Financial analysis & lifestyle flexibility - critical first 3 years',
         icon: '🏠',
-        keyAction: 'Rent initially while you stabilize and explore neighborhoods',
+        keyAction: 'Rent initially (2-3 yrs) while you stabilize, then buy for stability',
         importance: 'High',
-        overview: 'The conventional wisdom of "always rent first" exists for good reason. The first 2-3 years after return involve significant life adjustments. Buying too soon can lock you into wrong location, wrong size, or wrong lifestyle. Renting provides flexibility during the critical adjustment period.',
+        overview: 'The "Rent vs Buy" decision in India is not just financial; it is emotional and logistical. Renting offers flexibility to explore neighborhoods, schools, and commute times without capital lock-in. Real estate in India is illiquid and comes with high transaction costs (stamp duty, registration). Buying makes sense for long-term stability and immunity from rental inflation, but only after you are 100% settled.',
         benefits: [
-            'Flexibility to explore neighborhoods',
-            'Time to understand local market',
-            'Lower initial capital commitment',
-            'Ability to adjust to lifestyle changes',
-            'Option to return if needed'
+            'Flexibility to relocate if job/school changes',
+            'Avoid 25% down payment lock-in immediately',
+            'Better rental yield arbitrage (Rent is 2-3%, Loan is 8-9%)',
+            'Protection from initial property selection mistakes',
+            'Zero maintenance headaches for major structural issues'
         ],
         keyFacts: [
             { label: 'Recommended Rent Period', value: '2-3 years minimum' },
-            { label: 'Rental Yield', value: '2-3% in metros (low)' },
-            { label: 'Stamp Duty', value: '5-7% of property value' },
-            { label: 'Registration', value: '1% additional' },
-            { label: 'Maintenance', value: '₹8-15 per sq ft monthly' }
+            { label: 'Rental Yield', value: '2-3% (Low) vs EMI Interest ~8.5%' },
+            { label: 'Stamp Duty + Reg', value: '6-8% of property value (Lost capital)' },
+            { label: 'Breakeven Period', value: '7+ years to beat renting + investing' },
+            { label: 'Liquidity', value: 'Very Low (6-12 months to sell)' }
         ],
         steps: [
-            'Calculate total cost of ownership vs renting',
-            'Research multiple neighborhoods by renting',
-            'Understand your actual space needs',
-            'Evaluate appreciation potential vs yield',
-            'Consider future life changes (kids, parents)'
+            'Compare "Rent + SIP" vs "EMI" for 10 years',
+            'Check rental yield of the specific society (Annual Rent / Price)',
+            'Factor in non-refundable costs: Stamp duty, Registration, Interiors',
+            'Consider job stability and likelihood of city change',
+            'Evaluate potential for property appreciation in that specific micro-market'
         ],
         warnings: [
-            'Low rental yields mean buying is for appreciation not income',
-            'Liquidity is poor - selling takes 6-12 months',
-            'Market can correct 10-20% in downturns',
-            'Maintenance and society issues can surprise'
+            'Don\'t buy just for "social status" or peer pressure',
+            'Under-construction projects hold high delivery risk',
+            'Interiors can cost 10-20% of property value extra',
+            'Resale market is cash-heavy and complex'
         ],
         officialSources: [
             { name: 'NoBroker', url: 'https://nobroker.in', description: 'Commission-free rentals' },
-            { name: 'Square Yards', url: 'https://squareyards.com', description: 'Property analytics' },
-            { name: 'PropTiger', url: 'https://proptiger.com', description: 'Property research' }
+            { name: 'MagicBricks Advice', url: 'https://magicbricks.com/advice', description: 'Buying guides' },
+            { name: 'HDFC Capital', url: 'https://hdfc.com', description: 'Market reports' }
+        ]
+    },
+    {
+        id: 'other-facilities',
+        name: 'Critical Facilities & Amenities',
+        description: 'Non-negotiable amenities for NRI lifestyle standards',
+        icon: '⚡',
+        keyAction: 'Verify "invisible" infra: Water, Power Backup, Security',
+        importance: 'High',
+        overview: 'Coming from the US, certain amenities are taken for granted. In India, they are premium features. Power cuts, water shortages, and security concerns are real. Your choice of society (Gated Community vs Standalone) determines your quality of life. Always prioritize functional infrastructure over cosmetic luxury.',
+        benefits: [
+            'Uninterrupted work-from-home (100% Power Backup)',
+            'Water security (STP, multiple water sources)',
+            'Safety for kids and elderly (24/7 Security)',
+            'Social infrastructure (Clubhouse, Gym, Sports)',
+            'Managed community services (Plumber, Electrician on call)'
+        ],
+        keyFacts: [
+            { label: 'Power Backup', value: 'Ensure 100% DG backup (inc. ACs)' },
+            { label: 'Water Supply', value: 'Kavery/Manjeera municipal + Borewell' },
+            { label: 'Security', value: 'MyGate/NoBrokerHood app enabled' },
+            { label: 'Internet', value: 'Fiber optic cabling to home' },
+            { label: 'Maintenance Fee', value: '₹3-6 per sqft/month' }
+        ],
+        steps: [
+            'Ask specifically if DG backup covers ACs and Geysers',
+            'Check summer water situation history of the society',
+            'Verify guest parking availability',
+            'Inspect clubhouse operational status and fees',
+            'Talk to residents about RWA (Association) effectiveness'
+        ],
+        warnings: [
+            'Generators meant for lights/fans wont run ACs for WFH',
+            'Tanker water dependence leads to high summer maintenance',
+            'Unregistered societies have legal risks',
+            'Amenities in brochure may differ from reality'
+        ],
+        officialSources: [
+            { name: 'MyGate', url: 'https://mygate.com', description: 'Community management app' },
+            { name: 'ADDA', url: 'https://adda.io', description: 'Apartment management software' }
         ]
     },
     {
