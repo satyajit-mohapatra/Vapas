@@ -13,6 +13,8 @@ import {
     Target
 } from 'lucide-react';
 import { MIGRATION_DESTINATIONS } from '../../data/constants';
+import { MIGRATION_HUB_TOPICS } from '../../data/moduleDetails';
+import { TopicCard, TopicDetailModal, useTopicSelection } from '../shared/TopicComponents';
 
 type DestinationId = keyof typeof MIGRATION_DESTINATIONS;
 type ActiveSection = 'corridors' | 'matrix' | 'strategies';
@@ -98,10 +100,26 @@ export default function GlobalMigrationHub() {
 // Corridors Section
 function CorridorsSection() {
     const [selectedDestination, setSelectedDestination] = useState<DestinationId | null>(null);
+    const { selectedTopic, openTopic, closeTopic } = useTopicSelection();
     const destinations = Object.values(MIGRATION_DESTINATIONS);
 
     return (
         <div className="animate-fadeIn">
+            {/* Expandable Topics */}
+            <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>📚 Explore Migration Topics</h2>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '24px', fontSize: '14px' }}>
+                Click on any topic to view detailed information, action steps, and official sources.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+                {MIGRATION_HUB_TOPICS.map((topic) => (
+                    <TopicCard
+                        key={topic.id}
+                        topic={topic}
+                        onClick={() => openTopic(topic)}
+                    />
+                ))}
+            </div>
+
             {/* Strategic Context Alert */}
             <div className="alert alert-info" style={{ marginBottom: '32px' }}>
                 <Info size={24} />
@@ -205,6 +223,14 @@ function CorridorsSection() {
                     </div>
                 ))}
             </div>
+
+            {/* Topic Detail Modal */}
+            {selectedTopic && (
+                <TopicDetailModal
+                    topic={selectedTopic}
+                    onClose={closeTopic}
+                />
+            )}
         </div>
     );
 }

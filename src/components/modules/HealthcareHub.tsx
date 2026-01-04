@@ -13,6 +13,8 @@ import {
     TrendingDown
 } from 'lucide-react';
 import { HEALTHCARE_DATA, HEALTHCARE_COMPREHENSIVE } from '../../data/constants';
+import { HEALTHCARE_TOPICS } from '../../data/moduleDetails';
+import { TopicCard, TopicDetailModal, useTopicSelection } from '../shared/TopicComponents';
 
 type ActiveTab = 'overview' | 'insurance' | 'hospitals' | 'telemedicine' | 'mentalHealth';
 
@@ -95,8 +97,33 @@ export default function HealthcareHub() {
 
 // Overview Tab
 function OverviewTab() {
+    const { selectedTopic, openTopic, closeTopic } = useTopicSelection();
+
     return (
         <div className="animate-fadeIn">
+            {/* Expandable Topics */}
+            <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>📚 Explore Healthcare Topics</h2>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '24px', fontSize: '14px' }}>
+                Click on any topic to view detailed information, action steps, and official sources.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+                {HEALTHCARE_TOPICS.map((topic) => (
+                    <TopicCard
+                        key={topic.id}
+                        topic={topic}
+                        onClick={() => openTopic(topic)}
+                    />
+                ))}
+            </div>
+
+            {/* Topic Detail Modal */}
+            {selectedTopic && (
+                <TopicDetailModal
+                    topic={selectedTopic}
+                    onClose={closeTopic}
+                />
+            )}
+
             {/* Key Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px' }}>
                 <div className="stat-card">

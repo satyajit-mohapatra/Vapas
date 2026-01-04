@@ -25,6 +25,8 @@ import {
     PolarRadiusAxis,
 } from 'recharts';
 import { CITY_INTELLIGENCE } from '../../data/relocationReportData';
+import { REAL_ESTATE_TOPICS } from '../../data/moduleDetails';
+import { TopicCard, TopicDetailModal, useTopicSelection } from '../shared/TopicComponents';
 
 // --- Local Data for Visualizations ---
 const OVERVIEW_CHART_DATA = [
@@ -86,11 +88,35 @@ const CITY_RADAR_DATA: Record<string, any[]> = {
 export default function RealEstateMatrix() {
     const [activeTab, setActiveTab] = useState<'overview' | 'city-guide' | 'toolkit'>('overview');
     const [selectedCityId, setSelectedCityId] = useState<string>('bengaluru');
+    const { selectedTopic, openTopic, closeTopic } = useTopicSelection();
 
     const selectedCity = CITY_INTELLIGENCE[selectedCityId as keyof typeof CITY_INTELLIGENCE];
 
     const renderOverviewTab = () => (
         <div className="animate-fadeIn">
+            {/* Expandable Topics */}
+            <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>📚 Explore Real Estate Topics</h2>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '24px', fontSize: '14px' }}>
+                Click on any topic to view detailed information, action steps, and official sources.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+                {REAL_ESTATE_TOPICS.map((topic) => (
+                    <TopicCard
+                        key={topic.id}
+                        topic={topic}
+                        onClick={() => openTopic(topic)}
+                    />
+                ))}
+            </div>
+
+            {/* Topic Detail Modal */}
+            {selectedTopic && (
+                <TopicDetailModal
+                    topic={selectedTopic}
+                    onClose={closeTopic}
+                />
+            )}
+
             {/* Top Cards Row */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '40px' }}>
                 {OVERVIEW_CHART_DATA.map((city, idx) => (

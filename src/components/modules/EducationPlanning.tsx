@@ -19,6 +19,8 @@ import {
     TrendingUp,
     HandHeart
 } from 'lucide-react';
+import { EDUCATION_TOPICS } from '../../data/moduleDetails';
+import { TopicCard, TopicDetailModal, useTopicSelection } from '../shared/TopicComponents';
 
 type ActiveSection = 'overview' | 'boards' | 'sen' | 'cities' | 'economics' | 'therapy' | 'transition';
 
@@ -300,8 +302,33 @@ export default function EducationPlanning() {
 
 // Overview Section
 function OverviewSection() {
+    const { selectedTopic, openTopic, closeTopic } = useTopicSelection();
+
     return (
         <div className="animate-fadeIn">
+            {/* Expandable Topics */}
+            <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>📚 Explore Education Topics</h2>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '24px', fontSize: '14px' }}>
+                Click on any topic to view detailed information, action steps, and official sources.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+                {EDUCATION_TOPICS.map((topic) => (
+                    <TopicCard
+                        key={topic.id}
+                        topic={topic}
+                        onClick={() => openTopic(topic)}
+                    />
+                ))}
+            </div>
+
+            {/* Topic Detail Modal */}
+            {selectedTopic && (
+                <TopicDetailModal
+                    topic={selectedTopic}
+                    onClose={closeTopic}
+                />
+            )}
+
             <div className="glass-card" style={{ padding: '40px', marginBottom: '32px', background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)' }}>
                 <h2 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <Sparkles className="text-accent-primary" />
