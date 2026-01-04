@@ -11,9 +11,21 @@ import {
     ChevronRight
 } from 'lucide-react';
 import { MODULE_IMPORTANCE_COLORS, type ModuleTopicDetail } from '../../data/moduleDetails';
+import { URGENCY_COLORS, type PillarDetail } from '../../data/pillarDetails';
+
+// Union type for all topic details
+export type GenericTopicDetail = ModuleTopicDetail | PillarDetail;
+
+function getStatusStyle(topic: GenericTopicDetail) {
+    if ('importance' in topic) {
+        return MODULE_IMPORTANCE_COLORS[topic.importance];
+    }
+    return URGENCY_COLORS[topic.urgency];
+}
 
 // Reusable Topic Detail Modal Component
-export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail; onClose: () => void }) {
+export function TopicDetailModal({ topic, onClose }: { topic: GenericTopicDetail; onClose: () => void }) {
+
     return (
         <div
             style={{
@@ -25,11 +37,14 @@ export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail;
                 background: 'rgba(0, 0, 0, 0.8)',
                 backdropFilter: 'blur(8px)',
                 zIndex: 1000,
+                overflowY: 'auto',
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                padding: '40px 20px',
-                overflowY: 'auto'
+                flexDirection: 'column',
+                alignItems: 'center',
+                paddingTop: '40px',
+                paddingBottom: '40px',
+                paddingLeft: '20px',
+                paddingRight: '20px'
             }}
             onClick={onClose}
         >
@@ -39,10 +54,9 @@ export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail;
                     borderRadius: '16px',
                     maxWidth: '900px',
                     width: '100%',
-                    maxHeight: 'calc(100vh - 80px)',
-                    overflowY: 'auto',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)'
+                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+                    position: 'relative'
                 }}
                 onClick={(e) => e.stopPropagation()}
             >
@@ -53,7 +67,7 @@ export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail;
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'flex-start',
-                    background: MODULE_IMPORTANCE_COLORS[topic.importance].bg,
+                    background: getStatusStyle(topic).bg,
                     borderRadius: '16px 16px 0 0'
                 }}>
                     <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
@@ -65,9 +79,11 @@ export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail;
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontSize: '24px'
+                            fontSize: '24px',
+                            color: 'white',
+                            fontWeight: '700'
                         }}>
-                            {topic.icon}
+                            {'icon' in topic ? topic.icon : (topic as any).id}
                         </div>
                         <div>
                             <h2 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '4px', color: 'var(--text-primary)' }}>
@@ -81,11 +97,11 @@ export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail;
                                 borderRadius: '20px',
                                 fontSize: '12px',
                                 fontWeight: '600',
-                                background: MODULE_IMPORTANCE_COLORS[topic.importance].color + '30',
-                                color: MODULE_IMPORTANCE_COLORS[topic.importance].color
+                                background: getStatusStyle(topic).color + '30',
+                                color: getStatusStyle(topic).color
                             }}>
                                 <Shield size={12} />
-                                {MODULE_IMPORTANCE_COLORS[topic.importance].label}
+                                {getStatusStyle(topic).label}
                             </div>
                         </div>
                     </div>
@@ -217,6 +233,30 @@ export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail;
                         </div>
                     )}
 
+                    {/* Eligibility (for Pillars only) */}
+                    {'eligibility' in topic && topic.eligibility && (
+                        <div style={{ marginBottom: '28px' }}>
+                            <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <CheckCircle2 size={18} style={{ color: 'var(--accent-info)' }} />
+                                Eligibility
+                            </h3>
+                            <div style={{ display: 'grid', gap: '8px' }}>
+                                {topic.eligibility.map((item, idx) => (
+                                    <div key={idx} style={{
+                                        padding: '12px 16px',
+                                        background: 'rgba(14, 165, 233, 0.1)',
+                                        borderLeft: '3px solid #0EA5E9',
+                                        borderRadius: '4px',
+                                        fontSize: '14px',
+                                        color: 'var(--text-secondary)'
+                                    }}>
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     {/* Warnings */}
                     {topic.warnings && topic.warnings.length > 0 && (
                         <div style={{
@@ -310,7 +350,7 @@ export function TopicDetailModal({ topic, onClose }: { topic: ModuleTopicDetail;
 }
 
 // Expandable Topic Card Component
-export function TopicCard({ topic, onClick }: { topic: ModuleTopicDetail; onClick: () => void }) {
+export function TopicCard({ topic, onClick }: { topic: GenericTopicDetail; onClick: () => void }) {
     return (
         <div
             className="glass-card"
@@ -319,7 +359,7 @@ export function TopicCard({ topic, onClick }: { topic: ModuleTopicDetail; onClic
                 padding: '24px',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                borderLeft: `4px solid ${MODULE_IMPORTANCE_COLORS[topic.importance].color}`
+                borderLeft: `4px solid ${getStatusStyle(topic).color}`
             }}
             onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px)';
@@ -335,14 +375,16 @@ export function TopicCard({ topic, onClick }: { topic: ModuleTopicDetail; onClic
                     width: '48px',
                     height: '48px',
                     borderRadius: '12px',
-                    background: MODULE_IMPORTANCE_COLORS[topic.importance].bg,
+                    background: getStatusStyle(topic).bg,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '24px',
-                    flexShrink: 0
+                    flexShrink: 0,
+                    color: getStatusStyle(topic).color,
+                    fontWeight: '700'
                 }}>
-                    {topic.icon}
+                    {'icon' in topic ? topic.icon : (topic as any).id}
                 </div>
                 <div style={{ flex: 1 }}>
                     <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '6px' }}>{topic.name}</h3>
@@ -353,10 +395,10 @@ export function TopicCard({ topic, onClick }: { topic: ModuleTopicDetail; onClic
                             fontWeight: '600',
                             padding: '4px 10px',
                             borderRadius: '20px',
-                            background: MODULE_IMPORTANCE_COLORS[topic.importance].bg,
-                            color: MODULE_IMPORTANCE_COLORS[topic.importance].color
+                            background: getStatusStyle(topic).bg,
+                            color: getStatusStyle(topic).color
                         }}>
-                            {topic.importance}
+                            {'importance' in topic ? topic.importance : topic.urgency}
                         </span>
                         <div style={{
                             display: 'flex',
