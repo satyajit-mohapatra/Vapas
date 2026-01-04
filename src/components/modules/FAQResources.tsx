@@ -19,6 +19,111 @@ import {
 // FAQ Data
 const faqData = [
     {
+        category: 'Seven Critical Pillars',
+        questions: [
+            {
+                question: 'What is an RFC (Resident Foreign Currency) Account and why do I need one?',
+                answer: `An RFC Account allows returning NRIs to hold foreign currency (USD, EUR, GBP, etc.) in India without mandatory conversion to INR:
+
+Key Benefits:
+• Funds are 100% repatriable without RBI restrictions
+• Bypasses the $250,000/year LRS (Liberalized Remittance Scheme) limit
+• Interest is tax-free during RNOR period (2-3 years)
+• No time limit on holding funds
+• Currency hedge against rupee fluctuations
+
+Eligibility:
+• Must have resided abroad for at least 1 year (182+ days)
+• Returning to India for permanent settlement
+
+Important: Open RFC account before converting NRE account. Once NRE is converted to resident savings, you cannot move funds back to RFC.`
+            },
+            {
+                question: 'How can I get health insurance coverage for pre-existing conditions from Day 1?',
+                answer: `Indian health insurance has Pre-Existing Disease (PED) waiting periods of up to 3 years. Strategic planning can give you full coverage upon return:
+
+Strategy:
+• Purchase Indian health insurance 3 years BEFORE returning to India
+• Maintain the policy while abroad (pay annual premiums)
+• By return date, PED waiting periods are exhausted
+
+Key Facts (IRDAI 2024):
+• Maximum PED waiting period: 3 years (reduced from 4)
+• Initial waiting period: 30 days (except accidents)
+• Some insurers offer "PED Buyback" riders to reduce waiting
+
+Recommended Coverage:
+• Sum Insured: ₹50 Lakhs - ₹1 Crore for family
+• Type: Family Floater
+• Premium: ₹25,000 - ₹75,000/year (90%+ cheaper than US)
+
+Disclose all pre-existing conditions honestly to avoid claim rejection.`
+            },
+            {
+                question: 'Can I receive US Social Security benefits while living in India?',
+                answer: `Yes, you can receive US Social Security benefits in India if you qualify:
+
+Eligibility:
+• Need 40 credits (approximately 10 years of US work)
+• Maximum 4 credits can be earned per year
+• India is on the approved list for receiving SS payments
+
+Important Considerations:
+• No Totalization Agreement: India and US do NOT have a bilateral agreement
+• Cannot combine India work credits with US credits
+• Medicare is NOT available outside the US
+• Benefits are paid in USD, deposited to your bank
+
+Strategy:
+• If you have 35-39 credits, consider working 1-2 more years to reach 40
+• Each additional high-earning year increases your benefit amount
+• File Form W-8BEN to certify non-resident status to SS Administration`
+            },
+            {
+                question: 'Should I sell or rent my US property when returning to India?',
+                answer: `Consider renting your US property initially (trial period) rather than selling immediately:
+
+Benefits of Renting:
+• Rental income is tax-free in India during RNOR period
+• Keep option to return if India doesn't work out
+• Continue building equity and appreciation
+• Dollar income hedges against rupee depreciation
+
+If Selling (FIRPTA Rules):
+• Withholding rates: 0-15% depending on sale price and buyer's use
+• File Form 8288-B before closing to request reduced withholding
+• Long-term capital gains: 15-20% in US
+• Section 121 Exclusion: Up to $250K/$500K if lived 2 of last 5 years
+
+Important: Section 121 exclusion expires 3 years after moving out. Plan sale timing carefully. Cars have 165% import duty—never ship vehicles to India.`
+            },
+            {
+                question: 'What happens if I don\'t link my PAN and Aadhaar?',
+                answer: `PAN-Aadhaar linking is mandatory for returning NRIs becoming residents. Failure to link has serious consequences:
+
+Consequences of Inoperative PAN:
+• Higher TDS: 20% instead of applicable rate
+• Cannot file Income Tax Returns
+• New investments blocked (MF, stocks)
+• Loan applications rejected
+• Bank account restrictions possible
+
+Who Must Link:
+• All returning NRIs who become residents
+• NRIs who already have Aadhaar (even if staying abroad)
+• NOT required for NRIs with correct non-resident status in PAN records
+
+How to Link:
+1. Visit incometax.gov.in
+2. Navigate to Link Aadhaar
+3. Pay ₹1,000 fee (if past original deadline)
+4. Complete OTP verification
+
+For Aadhaar: NRIs with valid Indian passport can apply immediately at any Aadhaar Seva Kendra (182-day requirement waived).`
+            }
+        ]
+    },
+    {
         category: 'Banking & Finance',
         questions: [
             {
