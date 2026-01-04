@@ -949,8 +949,13 @@ export default function R2IChecklist() {
             {/* Print-only view: Shows ALL categories with ALL sections and items expanded */}
             <div className="print-only-view">
                 <div className="print-header">
+                    <div className="print-branding">
+                        <span className="print-logo">🌐 Vāpas</span>
+                        <span className="print-tagline">Global Indian Intelligence Platform</span>
+                    </div>
                     <h1>📋 R2I Master Checklist</h1>
-                    <p>Complete guide for returning to India • Generated: {new Date().toLocaleDateString()}</p>
+                    <p>Your Complete Guide for Returning to India</p>
+                    <p className="print-date">Generated: {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
                 </div>
                 {Object.entries(CHECKLIST_DATA).map(([categoryKey, category]) => (
                     <div key={categoryKey} className="print-category">
@@ -1022,6 +1027,26 @@ export default function R2IChecklist() {
                     border-bottom: 2px solid #333;
                 }
 
+                .print-branding {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    margin-bottom: 16px;
+                }
+
+                .print-logo {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #6366f1;
+                }
+
+                .print-tagline {
+                    font-size: 12px;
+                    color: #666;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
                 .print-header h1 {
                     font-size: 24px;
                     margin: 0 0 8px 0;
@@ -1030,7 +1055,12 @@ export default function R2IChecklist() {
                 .print-header p {
                     font-size: 14px;
                     color: #666;
-                    margin: 0;
+                    margin: 0 0 4px 0;
+                }
+
+                .print-date {
+                    font-size: 12px;
+                    color: #888;
                 }
 
                 .print-category {
@@ -1482,11 +1512,13 @@ export default function R2IChecklist() {
 
                     body {
                         background: white !important;
+                        color: black !important;
                     }
 
                     .checklist-container {
-                        padding: 0;
+                        padding: 20px;
                         max-width: 100%;
+                        background: white !important;
                     }
 
                     /* Hide the interactive view and app chrome when printing */
@@ -1494,30 +1526,130 @@ export default function R2IChecklist() {
                     .footer,
                     .checklist-header,
                     .category-tabs,
-                    .category-content {
+                    .category-content,
+                    .header-actions,
+                    .action-btn {
                         display: none !important;
                     }
 
                     /* Show the print-only view */
                     .print-only-view {
                         display: block !important;
+                        color: black !important;
+                    }
+
+                    .print-header {
+                        border-bottom: 3px solid #6366f1 !important;
+                        padding-bottom: 20px !important;
+                        margin-bottom: 24px !important;
+                    }
+
+                    .print-branding {
+                        display: flex !important;
+                        align-items: center !important;
+                        gap: 12px !important;
+                        margin-bottom: 12px !important;
+                    }
+
+                    .print-logo {
+                        font-size: 22px !important;
+                        font-weight: 700 !important;
+                        color: #6366f1 !important;
+                    }
+
+                    .print-tagline {
+                        font-size: 11px !important;
+                        color: #666 !important;
+                        text-transform: uppercase !important;
+                        letter-spacing: 1px !important;
+                    }
+
+                    .print-header h1 {
+                        font-size: 28px !important;
+                        color: black !important;
+                        margin-bottom: 8px !important;
+                    }
+
+                    .print-date {
+                        font-size: 11px !important;
+                        color: #888 !important;
+                        margin-top: 8px !important;
+                    }
+
+                    .print-header p {
+                        color: #333 !important;
+                        font-size: 14px !important;
                     }
 
                     .print-category {
                         page-break-inside: avoid;
+                        margin-bottom: 32px !important;
+                    }
+
+                    .print-category-header h2 {
+                        color: black !important;
+                        font-size: 20px !important;
+                    }
+
+                    .print-category-header p {
+                        color: #444 !important;
                     }
 
                     .print-section {
                         page-break-inside: avoid;
+                        border: 1px solid #ddd !important;
+                        margin-bottom: 20px !important;
+                    }
+
+                    .print-section-header {
+                        background: #f0f0f0 !important;
+                        border-bottom: 1px solid #ddd !important;
+                    }
+
+                    .print-section-header h3 {
+                        color: black !important;
+                        font-size: 16px !important;
                     }
 
                     .print-item {
                         page-break-inside: avoid;
+                        border-bottom: 1px solid #eee !important;
+                    }
+
+                    .print-item-task {
+                        color: black !important;
+                    }
+
+                    .print-item.completed .print-item-task {
+                        color: #666 !important;
+                        text-decoration: line-through !important;
+                    }
+
+                    .print-item-deadline {
+                        background: #f5f5f5 !important;
+                        color: #555 !important;
+                    }
+
+                    .print-item-help {
+                        background: #f9f9f9 !important;
+                        border-left: 4px solid #6366f1 !important;
+                    }
+
+                    .print-item-help p {
+                        color: #333 !important;
+                    }
+
+                    .print-link {
+                        color: #4338ca !important;
+                        background: #e0e7ff !important;
                     }
 
                     .importance-badge {
                         -webkit-print-color-adjust: exact !important;
                         print-color-adjust: exact !important;
+                        color: white !important;
+                        padding: 3px 8px !important;
+                        font-size: 10px !important;
                     }
                 }
 

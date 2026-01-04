@@ -632,3 +632,108 @@ body {
     padding: 0 16px;
   }
 }
+
+/* ================================
+   GLOBAL PRINT STYLES
+   ================================ */
+@media print {
+
+  /* Force color printing */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Reset background for printing */
+  html,
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+  }
+
+  body {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide global app chrome */
+  .header,
+  header,
+  .footer,
+  footer,
+  .mobile-nav,
+  .mobile-menu-btn,
+  .desktop-nav,
+  .header-actions,
+  .nav-link,
+  nav {
+    display: none !important;
+  }
+
+  /* Adjust main content for print */
+  .app {
+    min-height: auto !important;
+  }
+
+  .main-content {
+    padding-top: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Remove shadows, borders, and effects that don't print well */
+  .glass-card,
+  .module-card,
+  .stat-card {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid #ccc !important;
+    background: white !important;
+  }
+
+  /* Hide interactive elements */
+  button:not(.print-include),
+  .btn-primary,
+  .btn-secondary,
+  .action-btn,
+  .print-btn {
+    display: none !important;
+  }
+
+  /* Improve link visibility for print */
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+
+  /* Page break controls */
+  h1,
+  h2,
+  h3 {
+    page-break-after: avoid !important;
+    color: black !important;
+  }
+
+  p,
+  li,
+  table,
+  .card {
+    page-break-inside: avoid !important;
+  }
+
+  /* Remove animations and transforms */
+  * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  /* Container adjustments for print */
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
