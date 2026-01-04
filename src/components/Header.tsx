@@ -144,7 +144,8 @@ export default function Header({ activeModule, onNavigate }: HeaderProps) {
 
         .header-nav {
           display: flex;
-          gap: 4px;
+          gap: 8px;
+          align-items: center;
         }
 
         .header-actions {
