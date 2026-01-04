@@ -946,11 +946,214 @@ export default function R2IChecklist() {
                 ))}
             </div>
 
+            {/* Print-only view: Shows ALL categories with ALL sections and items expanded */}
+            <div className="print-only-view">
+                <div className="print-header">
+                    <h1>📋 R2I Master Checklist</h1>
+                    <p>Complete guide for returning to India • Generated: {new Date().toLocaleDateString()}</p>
+                </div>
+                {Object.entries(CHECKLIST_DATA).map(([categoryKey, category]) => (
+                    <div key={categoryKey} className="print-category">
+                        <div className="print-category-header">
+                            <h2>{category.icon} {category.title}</h2>
+                            <p>{category.description}</p>
+                        </div>
+                        {category.sections.map((section) => (
+                            <div key={section.name} className="print-section">
+                                <div className="print-section-header">
+                                    <h3>{section.name}</h3>
+                                    <span
+                                        className="importance-badge"
+                                        style={{ background: getImportanceColor(section.importance) }}
+                                    >
+                                        {section.importance}
+                                    </span>
+                                </div>
+                                <div className="print-section-items">
+                                    {section.items.map((item) => (
+                                        <div key={item.id} className={`print-item ${checkedItems.has(item.id) ? 'completed' : ''}`}>
+                                            <div className="print-item-main">
+                                                <span className="print-checkbox">
+                                                    {checkedItems.has(item.id) ? '☑' : '☐'}
+                                                </span>
+                                                <div className="print-item-content">
+                                                    <span className="print-item-task">{item.task}</span>
+                                                    {item.deadline && (
+                                                        <span className="print-item-deadline">⏰ {item.deadline}</span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="print-item-help">
+                                                <p>ℹ️ {item.help}</p>
+                                                {'links' in item && item.links && (item.links as { name: string; url: string }[]).length > 0 && (
+                                                    <div className="print-links">
+                                                        {(item.links as { name: string; url: string }[]).map((link: { name: string; url: string }, lIndex: number) => (
+                                                            <span key={lIndex} className="print-link">
+                                                                🔗 {link.name}: {link.url}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+
             <style>{`
                 .checklist-container {
                     max-width: 1200px;
                     margin: 0 auto;
                     padding: 24px;
+                }
+
+                /* Print-only view - hidden on screen */
+                .print-only-view {
+                    display: none;
+                }
+
+                .print-header {
+                    margin-bottom: 24px;
+                    padding-bottom: 16px;
+                    border-bottom: 2px solid #333;
+                }
+
+                .print-header h1 {
+                    font-size: 24px;
+                    margin: 0 0 8px 0;
+                }
+
+                .print-header p {
+                    font-size: 14px;
+                    color: #666;
+                    margin: 0;
+                }
+
+                .print-category {
+                    margin-bottom: 24px;
+                    page-break-inside: avoid;
+                }
+
+                .print-category-header {
+                    margin-bottom: 12px;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid #ccc;
+                }
+
+                .print-category-header h2 {
+                    font-size: 18px;
+                    margin: 0 0 4px 0;
+                }
+
+                .print-category-header p {
+                    font-size: 12px;
+                    color: #666;
+                    margin: 0;
+                }
+
+                .print-section {
+                    margin-bottom: 16px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    page-break-inside: avoid;
+                }
+
+                .print-section-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    padding: 10px 12px;
+                    background: #f5f5f5;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                .print-section-header h3 {
+                    font-size: 14px;
+                    margin: 0;
+                }
+
+                .print-section-items {
+                    padding: 8px 12px;
+                }
+
+                .print-item {
+                    padding: 10px 0;
+                    border-bottom: 1px solid #eee;
+                    page-break-inside: avoid;
+                }
+
+                .print-item:last-child {
+                    border-bottom: none;
+                }
+
+                .print-item.completed .print-item-task {
+                    text-decoration: line-through;
+                    color: #888;
+                }
+
+                .print-item-main {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 10px;
+                }
+
+                .print-checkbox {
+                    font-size: 18px;
+                    line-height: 1;
+                }
+
+                .print-item-content {
+                    flex: 1;
+                }
+
+                .print-item-task {
+                    display: block;
+                    font-size: 13px;
+                    font-weight: 500;
+                    margin-bottom: 4px;
+                }
+
+                .print-item-deadline {
+                    display: inline-block;
+                    font-size: 11px;
+                    background: #f0f0f0;
+                    padding: 2px 8px;
+                    border-radius: 4px;
+                    color: #666;
+                }
+
+                .print-item-help {
+                    margin-top: 8px;
+                    margin-left: 28px;
+                    padding: 8px 12px;
+                    background: #f9f9f9;
+                    border-left: 3px solid #6366f1;
+                    border-radius: 0 4px 4px 0;
+                }
+
+                .print-item-help p {
+                    font-size: 11px;
+                    color: #555;
+                    margin: 0 0 6px 0;
+                    line-height: 1.4;
+                }
+
+                .print-links {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                }
+
+                .print-link {
+                    font-size: 10px;
+                    color: #4338ca;
+                    background: #e8e8ff;
+                    padding: 2px 8px;
+                    border-radius: 4px;
                 }
 
                 .checklist-header {
@@ -1272,38 +1475,49 @@ export default function R2IChecklist() {
                 }
 
                 @media print {
-                    .checklist-header,
-                    .category-tabs,
-                    .action-btn,
-                    .help-btn,
-                    .section-header svg {
-                        display: none !important;
+                    * {
+                        -webkit-print-color-adjust: exact !important;
+                        print-color-adjust: exact !important;
+                    }
+
+                    body {
+                        background: white !important;
                     }
 
                     .checklist-container {
                         padding: 0;
+                        max-width: 100%;
                     }
 
+                    /* Hide the interactive view and app chrome when printing */
+                    .header,
+                    .footer,
+                    .checklist-header,
+                    .category-tabs,
                     .category-content {
-                        border: none;
-                        padding: 0;
+                        display: none !important;
                     }
 
-                    .section-card {
-                        break-inside: avoid;
-                        border: 1px solid #ccc;
-                    }
-
-                    .section-items {
+                    /* Show the print-only view */
+                    .print-only-view {
                         display: block !important;
                     }
 
-                    .item-help {
-                        display: block !important;
+                    .print-category {
+                        page-break-inside: avoid;
                     }
 
-                    .checklist-item {
-                        border-color: #eee;
+                    .print-section {
+                        page-break-inside: avoid;
+                    }
+
+                    .print-item {
+                        page-break-inside: avoid;
+                    }
+
+                    .importance-badge {
+                        -webkit-print-color-adjust: exact !important;
+                        print-color-adjust: exact !important;
                     }
                 }
 
