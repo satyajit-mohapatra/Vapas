@@ -1,7 +1,7 @@
 import { Globe, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
-type ModuleId = 'dashboard' | 'migration' | 'financial' | 'realestate' | 'r2i' | 'giftcity' | 'wizard' | 'education' | 'healthcare' | 'career' | 'faq';
+type ModuleId = 'dashboard' | 'migration' | 'financial' | 'realestate' | 'r2i' | 'giftcity' | 'wizard' | 'education' | 'healthcare' | 'career' | 'faq' | 'checklist';
 
 interface HeaderProps {
   activeModule: ModuleId;
@@ -11,6 +11,7 @@ interface HeaderProps {
 // Ordered by priority for NRI returning to India
 const navItems: { id: ModuleId; label: string }[] = [
   { id: 'dashboard', label: 'Overview' },
+  { id: 'checklist', label: '📋 Checklist' },  // Master checklist - most actionable
   { id: 'r2i', label: 'R2I Protocol' },        // Core relocation logistics
   { id: 'financial', label: 'Financial Strategy' }, // 401k, taxation, banking
   { id: 'realestate', label: 'Real Estate' },  // Finding housing

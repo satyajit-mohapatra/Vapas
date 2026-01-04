@@ -12,8 +12,9 @@ import EducationPlanning from './components/modules/EducationPlanning';
 import HealthcareHub from './components/modules/HealthcareHub';
 import CareerHub from './components/modules/CareerHub';
 import FAQResources from './components/modules/FAQResources';
+import R2IChecklist from './components/modules/R2IChecklist';
 
-type ModuleId = 'dashboard' | 'migration' | 'financial' | 'realestate' | 'r2i' | 'giftcity' | 'wizard' | 'education' | 'healthcare' | 'career' | 'faq';
+type ModuleId = 'dashboard' | 'migration' | 'financial' | 'realestate' | 'r2i' | 'giftcity' | 'wizard' | 'education' | 'healthcare' | 'career' | 'faq' | 'checklist';
 
 function App() {
   const [activeModule, setActiveModule] = useState<ModuleId>('dashboard');
@@ -46,6 +47,8 @@ function App() {
         return <CareerHub />;
       case 'faq':
         return <FAQResources />;
+      case 'checklist':
+        return <R2IChecklist />;
       default:
         return <Dashboard onNavigate={handleModuleChange} />;
     }
